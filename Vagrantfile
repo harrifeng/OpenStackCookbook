@@ -26,6 +26,11 @@ Vagrant.configure("2") do |config|
     
   # Defaults
   config.vm.box = "bunchc/trusty-x64"
+  # use 163 mirror
+  config.vm.provision "shell", inline: <<-SHELL
+     sudo wget http://mirrors.163.com/.help/sources.list.trusty -O /etc/apt/sources.list
+     sudo apt update
+  SHELL
   config.vm.synced_folder ".", "/vagrant", type: "nfs"
 
   # VirtualBox
